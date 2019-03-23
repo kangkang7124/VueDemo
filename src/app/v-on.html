@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <script src="../lib/vue-2.4.0.js"></script>
+      <title>v-on</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-on: 用于绑定事件机制。-->
+      <!-- v-on: 可以缩写为@ 。-->
+      <input type="button" value="按钮" @click="show">
+    </div>
+
+    <script>
+      var vm =new Vue({
+        el: '#app',
+        data: {
+          mytitle: '啦啦啦啦啦'
+        },
+        methods:{ //定义当前vue实例的方法
+          /*show: function () {
+            alert("Hellow Word !");
+          }*/
+          show(){
+            alert("Hellow Word !");
+          }
+        }
+      });
+
+      /* document.getElementById('btn').onclick = function(){
+          alert('Hello')
+        } */
+    </script>
+  </body>
+</html>

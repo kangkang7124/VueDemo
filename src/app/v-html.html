@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <script src="../lib/vue-2.4.0.js"></script>
+      <title>v-html</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-html输入数据为html格式，v-html也会覆盖元素内容。-->
+      <div v-html="msg">==={{msg}}===</div>
+    </div>
+
+    <script>
+      var vm =new Vue({
+        el: '#app',
+        data: {
+          msg: '<h1>123456</h1>'
+        }
+      });
+    </script>
+  </body>
+</html>

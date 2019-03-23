@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="../lib/vue-2.4.0.js"></script>
+    <title>v-for</title>
+  </head>
+  <body>
+    <div id="app">
+
+      <h3>循环普通数组：</h3>
+      <p v-for="(item, i) in list1">索引：{{i}} --- 值：{{item}}</p><!--循环普通数组-->
+
+      <h3>循环对象数组：</h3>
+      <p v-for="(user, i) in list2">用户Id：{{ user.id }} --- 用户姓名：{{ user.name }} --- 索引：{{i}}</p>
+
+      <h3>循环对象：</h3>
+      <!-- 注意：在遍历对象身上的键值对的时候， 除了 有  val  key  ,在第三个位置还有 一个 索引  -->
+      <p v-for="(val, key, i) in user">值是： {{ val }} --- 键是： {{key}} --- 索引： {{i}}</p>
+
+      <h3>迭代数字：</h3>
+      <!-- 注意：如果使用 v-for 迭代数字的话，前面的 count 值从 1 开始 -->
+      <p v-for="count in 5">这是第 {{ count }} 次循环</p>
+
+      <h3>v-for中key的使用注意事项：</h3>
+      <div>
+        <label>Id:
+          <input type="text" v-model="id">
+        </label>
+
+        <label>Name:
+          <input type="text" v-model="name">
+        </label>
+
+        <input type="button" value="添加" @click="add">
+      </div>
+      <!-- 注意： v-for 循环的时候，key 属性只能使用 number获取string -->
+      <!-- 注意： key 在使用的时候，必须使用 v-bind 属性绑定的形式，指定 key 的值 -->
+      <!-- 在组件中，使用v-for循环的时候，或者在一些特殊情况中，如果 v-for 有问题，必须 在使用 v-for 的同时，指定 唯一的 字符串/数字 类型 :key 值 -->
+      <p v-for="item in list" :key="item.id">
+        <input type="checkbox">{{item.id}} --- {{item.name}}
+      </p>
+    </div>
+
+    <script>
+      var vm =new Vue({
+        el: '#app',
+        data: {
+          list1: ['数据1', '数据2', '数据3', '数据4', '数据5', '数据6'],/*普通数组*/
+          list2: [   /*对象数组*/
+            { id: 1, name: 'zs1' },
+            { id: 2, name: 'zs2' },
+            { id: 3, name: 'zs3' },
+            { id: 4, name: 'zs4' }
+          ],
+          user: {    /*对象*/
+            id: 1,
+            name: '托尼',
+            gender: '男'
+          },
+          id: '', /* v-for中key的使用注意事项 */
+          name: '',
+          list: [
+            { id: 1, name: '李斯' },
+            { id: 2, name: '嬴政' },
+            { id: 3, name: '赵高' },
+            { id: 4, name: '韩非' },
+            { id: 5, name: '荀子' }
+          ]
+        },
+        methods: {
+          add() { // 添加方法
+            this.list.unshift({ id: this.id, name: this.name })
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

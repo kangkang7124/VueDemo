@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="../lib/vue-2.4.0.js"></script>
+    <title>v-text</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-text会覆盖元素中原本的内容( ==={{msg}}=== 在此处无效，页面展示的是v-text赋值的内容)。-->
+      <h4 v-text="msg">==={{msg}}===</h4>
+    </div>
+
+    <script>
+      var vm =new Vue({
+        el: '#app',
+        data: {
+          msg: '123'
+        }
+      });
+    </script>
+  </body>
+</html>

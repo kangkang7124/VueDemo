@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>v-cloak</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+    <style>
+      /*属性选择器*/
+      [v-cloak] {
+         display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <!--使用 v-cloak 能够解决 插值表达式闪烁( 页面上先显示表达式{{msg}},取到返回值后再替换表达式)的问题。-->
+      <p v-cloak>{{ msg }}</p>
+    </div>
+
+    <script>
+      var vm =new Vue({
+        el: '#app',
+        data: {
+          msg: '123'
+        }
+      });
+    </script>
+  </body>
+</html>

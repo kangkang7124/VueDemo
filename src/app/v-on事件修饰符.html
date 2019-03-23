@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <script src="../lib/vue-2.4.0.js"></script>
+      <title>v-on事件修饰符</title>
+    <style>
+      .inner{
+        height: 80px;
+        background-color: darkcyan;
+      }
+    </style>
+  </head>
+
+  <body>
+  <div id="app">
+    <div class="inner" @click="divHandler()">
+      <input type="button" value="按钮1" @click.stop="show1()"> <!--.stop 阻止事件冒泡-->
+      <a href="http://www.baidu.com" @click.prevent="linkClick">有问题，先去百度</a><!--.prevent 阻止默认行为，不加载百度的页面 -->
+    </div>
+    <br/>
+    <div class="inner" @click.capture="divHandler()"><!--.capture实现捕捉触发事件的机制，点击按钮2，先执行divHandler，再执行show2-->
+      <input type="button" value="按钮2" @click="show2()">
+    </div>
+    <br/>
+    <div class="inner" @click.self="divHandler()"><!--.self 实现只有点击当前元素时候，才会触发事件处理函数。不会被冒泡触发-->
+      <input type="button" value="按钮2" @click="show2()">
+    </div>
+    <br/>
+    <div class="inner">
+      <a href="http://www.baidu.com" @click.prevent.once="linkClick">有问题，先去百度</a><!-- .once 只触发一次事件处理函数 -->
+    </div>
+  </div>
+
+  <script>
+    var vm =new Vue({
+      el: '#app',
+      data: {
+        mytitle: '啦啦啦啦啦'
+      },
+      methods:{ //定义当前vue实例的方法
+        show1(){
+          console.log("button1的点击事件！");
+        },
+        show2(){
+          console.log("button2的点击事件！");
+        },
+        linkClick(){
+          console.log("点击百度的链接！");
+        },
+        divHandler(){
+          console.log("div的点击事件！");
+        }
+      }
+    });
+  </script>
+  </body>
+</html>

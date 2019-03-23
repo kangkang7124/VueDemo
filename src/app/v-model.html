@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="../lib/vue-2.4.0.js"></script>
+    <title>v-model</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-text会覆盖元素中原本的内容( ==={{msg}}=== 在此处无效，页面展示的是v-text赋值的内容)。-->
+      <input type="text" style="width:100%;" :value="msg1"><!--v-bind: 只能单向绑定,从M 层自动绑定到V 层-->
+      <input type="text" style="width:100%;" v-model="msg2"> <!--v-model:实现双向绑定。注：只能应用在表单元素中，eg:input(radio, text, address, email....) select checkbox textarea等-->
+    </div>
+
+    <script>
+      var vm =new Vue({
+        el: '#app',
+        data: {
+          msg1: 'v-bind:单向数据绑定',
+          msg2: 'v-model双向数据绑定测试2'
+        }
+      });
+    </script>
+  </body>
+</html>

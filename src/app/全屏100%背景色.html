@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="../lib/vue-2.4.0.js"></script>
+  <title>背景色</title>
+  <style>
+    /*%是一个相对父元素计算得来的高度，要想使他有效，我们需要设置父元素的height;*/
+    /*所以我们要同时设置这两者的height，只设置其中一个是不行的：*/
+    /*html -> body -> <div id="app"> 设置子元素高度前，父级元素必须设置高度（不论是何种形式的高度）*/
+    html,body{
+      height: 100%;
+    }
+    #app{
+      height: 100%;
+      width: 100%;
+      background-color: darkcyan;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+
+</div>
+
+<script>
+  var vm =new Vue({
+    el: '#app',
+    data: {
+      mytitle: '背景色'
+    }
+  })
+</script>
+</body>
+</html>
