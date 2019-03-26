@@ -1,5 +1,6 @@
 ﻿品牌管理案例：
 	过滤器   :  Vue.js 允许你自定义过滤器，可被用于一些常见的文本格式化。过滤器可以用在两个地方：双花括号插值和 v-bind 表达式。
+	内置按键修饰符：.enter .tab .delete(捕获删除和退格键) .esc .space .up  .down .left .right
 	自定义键盘修饰符
 	自定义指令
 	生命周期(比较深，可以跳过)
@@ -77,6 +78,14 @@ ES6中字符串操作方法:
 2.字符串在另一个字符串首次出现位置【可以用来判断是否包含】。
     item.name.indexOf(keywords) != -1 ;   ------> indexOf返回某个指定的字符在某个字符串中首次出现的位置。如果没有找到就返回-1。
 	
+3.字符串填充(padStart , padEnd)
+	var y = dt.getFullYear();
+	var m = (dt.getMonth() + 1).toString().padStart(2, '0'); ---> 2位日期格式，位数不够补0。
+	var d = dt.getDate().toString().padStart(2, '0');  ---> 2位日期格式，位数不够补0。
+	
+	
+			
+			
 	
 		
 		
