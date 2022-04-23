@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组操作</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+    <link rel="stylesheet"  href="../lib/element-ui.css" />
+    <script src="../lib/elementui.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <input type="button" value="添加元素(从后面):" @click="pushElement" style="color:blue">
+    <input type="button" value="添加元素(从前面):" @click="pushElement2" style="color:blue">
+    <input type="button" value="删除元素(从最后一个):" @click="popElement" style="color:red">
+    <input type="button" value="删除元素(从第一个):" @click="shiftElement" style="color:red">
+    <input type="button" value="非响应式赋值(不会渲染到页面上):" @click="fuzhi" style="color:blue">
+    <input type="button" value="数组删除元素:" @click="remove1" style="color:red">
+    <input type="button" value="过滤:" @click="filter" style="color:blue">
+    <input type="button" value="遍历:" @click="map" style="color:red">
+
+    <el-table :data="objArrary">
+        <el-table-column prop="name" label="姓名"></el-table-column>
+        <el-table-column prop="sex" label="性别"></el-table-column>
+        <el-table-column prop="birthday" label="地址"></el-table-column>
+        <el-table-column prop="money" label="存款"></el-table-column>
+    </el-table>
+
+    <input type="button" value="汇总:" @click="reduce1" style="color:blue">
+    合计：{{sunTotal}}
+    <input type="button" value="汇总:" @click="reduce2" style="color:blue">
+
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            objArrary: [//对象数组
+                {name:'张三',sex:'1',birthday:'1999-03-09',money:200},
+                {name:'李四',sex:'1',birthday:'1991-03-09',money:150},
+                {name:'王五',sex:'2',birthday:'1998-03-09',money:400},
+                {name:'张三',sex:'1',birthday:'1999-03-09',money:105},
+            ],
+            strArrary:[//字符串数组
+                '张三',
+                '李四',
+                '王五',
+                '张三',
+            ],
+            sunTotal:0
+        },
+        activated(){},
+        mounted(){
+            //this.remove1()
+        },
+        methods: {
+          pushElement(){
+              this.objArrary.push({name:'吴六',sex:'1',birthday:'1990-03-09'})//添加元素(从后面)
+          },
+           pushElement2(){
+              this.objArrary.unshift({name:'吴六',sex:'1',birthday:'1990-03-09'})//添加元素(从前面)
+           },
+            popElement(){
+                this.objArrary.pop()//删除元素(从最后一个元素)
+            },
+            shiftElement(){
+                this.objArrary.shift()//删除元素(从第一个元素)
+            },
+            fuzhi(){//非响应式赋值 列表不会随着数组的改变而响应式渲染到页面上
+                this.objArrary[0] = {name:'李七',sex:'1',birthday:'1990-03-09'}
+                console.log(this.objArrary)
+            },
+            remove1(){
+                this.objArrary.forEach((item,index)=>{
+                    if(item.name == '张三'){
+                        this.objArrary.splice(index,1)//从第index元素起，删除1个元素
+                    }
+                })
+            },
+            filter(){//过滤
+                this.objArrary = this.objArrary.filter(item => {//方法不改变数组，要通过赋值来改变
+                    return item.name == '张三'
+                })
+            },
+            map(){//遍历操作数组，参数传递一个回调函数，可在回调函数中操作遍历的每一个数组值，如加减乘除。
+                this.objArrary = this.objArrary.map(item => {
+                    //console.log('map',item)
+                    item.name = item.name + '----'
+                    //item.sex = item.sex + '----'
+                    //item.birthday = item.birthday + '----'
+                    return item
+                })
+            },
+            reduce1(){//计算数组和
+                let arrts = [1, 2, 3, 4, 5, 6]
+                let result = arrts.reduce((pre, cur, index, array) => {
+                    return pre + cur
+                })
+                console.log(result) // 21
+                console.log(arrts)  // [1, 2, 3, 4, 5, 6]
+
+                let result2 = arrts.reduce((pre, cur, index, array) => {
+                    return pre + cur
+                }, 100)
+                console.log(result2) //121
+                // 如果传入了初始值，那么以初始值为基础，那么初始值就等于初始pre，加入到运算中。
+                this.sunTotal = result2
+            },
+            reduce2(){//数组去重
+                let arrts = [1, 2, 3, 4, 5, 6,7,2,4,5,1]
+                let arrts3 = arrts.reduce((pre, cur, index, array) => {
+                    !pre.includes(cur) && pre.push(cur);
+                    return pre;
+                },[])
+                console.log(arrts3)
+                //从上面例子中我们可以看到把传入的初始值，作为归并基础，这个思想很重要，也就是说，reduce开始执行的时候是以[ ]（初始值）为基础，第一次cur是attrs[0]的这个值，这个时候[ ]就是pre，然后进入迭代阶段。
+            },
+        }
+    });
+</script>
+</body>
+
+
+</html>
